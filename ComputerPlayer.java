@@ -4,7 +4,7 @@ import java.util.Random;
 public class ComputerPlayer implements Player{
 
     private char color;
-    private boolean trimming;
+    private boolean trimming = false;
     
     // make sure your constructor accepts a char (HexBoard.WHITE or
     // HexBoard.BLACK) to play with.  This should be remembered.
