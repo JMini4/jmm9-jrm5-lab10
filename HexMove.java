@@ -1,3 +1,9 @@
+/*
+Josie Maynard and Julia Mini 
+Jon's Lab
+Lab 10 - HexaPawn
+ */
+
 // A class for representing a HexAPawn move
 // (c) 2000, 2001 duane a. bailey
 

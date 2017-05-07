@@ -1,3 +1,10 @@
+/*
+Josie Maynard and Julia Mini
+Jon's Lab
+Lab 10 - HexaPawn
+MUST CHANGE THE HARDCODED 3X3 GAMEBOARD
+ */
+
 // A class for representing a HexAPawn board.
 // (c) 2000, 2001 duane a. bailey
 
