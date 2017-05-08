@@ -2,11 +2,10 @@
 Josie Maynard and Julia Mini
 Jon's Lab
 Lab 10 - HexaPawn
- */
 
-// Class that constructs a node in our game tree and allows us to add remove and access the nodes and their children
-// The class also contaisn methods for iterating over the nodes and accessing the tree for a given node 
-
+Class that constructs a node in our game tree and allows us to add remove and access the nodes and their children
+The class also contaisn methods for iterating over the nodes and accessing the tree for a given node 
+*/
 import structure5.*;
 import java.util.Iterator;
 

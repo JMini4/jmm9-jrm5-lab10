@@ -30,8 +30,10 @@ public class ComputerPlayer implements Player{
 	// base case: if the game is over, return who won
 	if(tree.isFinished(currentNode)){
 	    if(currentNode.getBoard().win(currentNode.getColor())){
+		System.out.println("Computer Player won!");
 		return this;
 	    } else {
+		System.out.println("Opponent won!");
 		trimming = true; //looking to trim
 		return opponent;
 	    }
