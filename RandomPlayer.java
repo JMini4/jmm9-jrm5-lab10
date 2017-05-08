@@ -1,4 +1,4 @@
-import structure5.*;OA
+import structure5.*;
 import java.util.Random;
 /*
 Josie Maynard and Julia Mini                                                                                                                                                              
@@ -28,7 +28,6 @@ public class RandomPlayer implements Player{
 	HexNode currentNode = tree.getCurrentNode();
 
 	if(tree.isFinished(currentNode)){  //the opponent won in the most recent move    
-	    System.out.println(currentNode.getBoard().toString());
 	    return opponent;
 	} else{ //complete the random move and update the tree
 	    currentNode = currentNode.getChild(moveChoice.nextInt(currentNode.getBoard().moves(currentNode.getColor()).size()));

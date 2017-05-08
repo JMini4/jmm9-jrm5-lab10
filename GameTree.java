@@ -30,8 +30,6 @@ class GameTree {
 
 	//populates the game tree
 	constructorHelper(root, color);
-	
-	System.out.println("count: " + count);
     }
 	
     // post: constructor that creates the game tree with a new board and the player with white pawns
