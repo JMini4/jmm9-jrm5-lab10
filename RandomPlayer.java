@@ -1,34 +1,36 @@
-import structure5.*;
+import structure5.*;OA
 import java.util.Random;
 /*
-Program Description:
+Josie Maynard and Julia Mini                                                                                                                                                              
+Jon's Lab                                                                                                                                                                                 
+Lab 10 - HexaPawn  
+
+Program Description: Creates a player for HexaPawn that chooses its moves randomly.
  */
 public class RandomPlayer implements Player{
 
     private char color;
-    
-    // make sure your constructor accepts a char (HexBoard.WHITE or
-    // HexBoard.BLACK) to play with.  This should be remembered.  
+
+    //pre: color has to be either HexBoard.WHITE or HexBoard.BLACK
+    //post: constructs a random player with a specific color  
     public RandomPlayer(char color){
+	assert(color == HexBoard.WHITE || color == HexBoard.BLACK):("Color must be white or black");
 	this.color = color;
     }
-    
+
+    //pre: tree and opponent are not null
+    //post: plays the game by picking moves randomly
     public Player play(GameTree tree, Player opponent){
 
+	//to randomly pick a move
 	Random moveChoice = new Random();
-	HexNode currentNode = tree.getCurrentNode();
 	
-	if(tree.isFinished(currentNode)){
+	HexNode currentNode = tree.getCurrentNode();
+
+	if(tree.isFinished(currentNode)){  //the opponent won in the most recent move    
 	    System.out.println(currentNode.getBoard().toString());
-	    if(currentNode.getBoard().win(currentNode.getColor())){
-		System.out.println("Random Player won!");
-		return this;
-	    } else {
-		System.out.println("Opponent2 won!");
-		return opponent;
-	    }
-	} else{
-	    //tree.setPreviousNode(currentNode);
+	    return opponent;
+	} else{ //complete the random move and update the tree
 	    currentNode = currentNode.getChild(moveChoice.nextInt(currentNode.getBoard().moves(currentNode.getColor()).size()));
 	    tree.setCurrentNode(currentNode);
 	    return opponent.play(currentNode.getTree(), this);

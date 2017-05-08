@@ -2,52 +2,52 @@
 Josie Maynard and Julia Mini
 Jon's Lab
 Lab 10 - HexaPawn
- */
 
-// Class that simulates a computer player in the game Hexapawn. The computer player can trim the game tree so
-// that it learns what moves lead to a win.
-
+Program description: Class that simulates a computer player in the game Hexapawn. The computer player can trim the game tree so
+that it avoids moves that previously led it to a loss.
+*/
 import structure5.*;
 import java.util.Random;
 
 public class ComputerPlayer implements Player{
 
     private char color;
+
+    //keeps track whether it needs to remove a node that led to a loss
     private boolean trimming = false;
     
-    // make sure your constructor accepts a char (HexBoard.WHITE or
-    // HexBoard.BLACK) to play with.  This should be remembered.
+    //pre: color has to be either HexBoard.WHITE or HexBoard.BLACK
+    //post: constructs a human player with a specific color
     public ComputerPlayer(char color){
+	assert(color == HexBoard.WHITE || color == HexBoard.BLACK):("Color must be white or black");
 	this.color = color;
     }
 
-    // post: recursively switches between players chooisng moves until one of them has won the game
+      
+    //pre: tree and opponent are not null
+    //post: plays the game by picking moves randomly and removes moves that led to a loss
     public Player play(GameTree tree, Player opponent){
 
+	//to randomly pick a move
 	Random moveChoice = new Random();
+	
 	HexNode currentNode = tree.getCurrentNode();
 	
-	// base case: if the game is over, return who won
-	if(tree.isFinished(currentNode)){
-	    if(currentNode.getBoard().win(currentNode.getColor())){
-		System.out.println("Computer Player won!");
-		return this;
-	    } else {
-		System.out.println("Opponent won!");
-		trimming = true; //looking to trim
-		return opponent;
-	    }
-	} else{ 
-	    //tree.setPreviousNode(currentNode());
-	    HexNode newNode = currentNode.getChild(moveChoice.nextInt(currentNode.getBoard().moves(currentNode.getColor()).size()));
+	if(tree.isFinished(currentNode)){ //the opponent won in the most recent move   
+	    trimming = true; //looking to trim 
+	    return opponent;
+	} else{ //complete the next move
+	    //choose a random move in the remaining children and update the tree
+	    HexNode newNode = currentNode.getChild(moveChoice.nextInt(currentNode.childrenSize()));
 	    tree.setCurrentNode(newNode);
+
+	    //see if the opponent won and remove the node if we need to trim
 	    Player winner = opponent.play(newNode.getTree(), this);
 	    if(winner == opponent && trimming == true){
-		currentNode.removeChild(newNode); //is this going to cause problems since wemay have updated current node- when does recursive call happen?
+		currentNode.removeChild(newNode); 
 		trimming = false; //already trimmed
 	    }
 	    return winner; 
 	}
-	
     }
 }
